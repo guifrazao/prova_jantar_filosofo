@@ -42,7 +42,7 @@ public class Main {
             
 
         try {   
-            Thread.sleep(30000); //execução do programa por pelo menos 30 segundos
+            Thread.sleep(30000); //limite de tempo (30 segundos) para que o programa consiga encerrar em caso de deadlock
         } catch(InterruptedException e) {
 
         }
