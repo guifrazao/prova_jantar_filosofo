@@ -22,7 +22,7 @@ public class Main {
             Garfo garfoEsq = listaGarfos.get(i);
             Garfo garfoDir = listaGarfos.get((i + 1) % 5);        
 
-            Filosofo f = new Filosofo("F" + String.valueOf(i + 1), garfoEsq, garfoDir);
+            Filosofo f = new Filosofo(i + 1, garfoEsq, garfoDir);
 
             if (primeiroFilosofo == null)
                 primeiroFilosofo = f;
@@ -42,16 +42,17 @@ public class Main {
             
 
         try {   
-            Thread.sleep(30000); //limite de tempo (30 segundos) para que o programa consiga encerrar em caso de deadlock
+            Thread.sleep(120000); //execução do programa por pelo menos 2 minutos
         } catch(InterruptedException e) {
 
         }
 
-        System.out.println("Fim do programa");
+        System.out.println("Programa encerrado");
         for (Thread t : threadsFilosofos){
             if (t.isAlive()){
                 t.interrupt();
             }
         }
+        System.exit(0);
     }
 }

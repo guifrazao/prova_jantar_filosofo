@@ -49,3 +49,11 @@ Fim do programa
 ```
 
 Cada filósofo pega um garfo, fazendo com que nenhum filósofo consiga pegar outro garfo.
+
+### Tarefa 2
+
+A causa do deadlock na tarefa anterior ocorre pois todos os filósofos sempre pegam o garfo na mesma direção (esquerda ou direita), fazendo com que, no final, todos os garfos à direita de cada filósofo estejam ocupados. No momento que um dos filósofos pega o garfo direito antes do esquerdo, um dos filósofos obrigatóriamente terá ambos os garfos adjacentes a ele ocupados, permitindo que pelo menos um filósofo pegue dois garfos e coma.
+
+Existe sim a possibilidade de starvation nesta versão. Quando um garfo é liberado, qualquer filósofo pronto pode pegá-lo, não importando se ele já jantou várias vezes ou não, fazendo com que exista a possibilidade de starvation caso um filósofo tenha muito azar com os garfos.
+
+Em comparação com a versão da tarefa 1, esta versão é uma melhoria direta pois elimina o deadlock presente na tarefa 1, porém ambas ainda possuem a possibilidade de starvation presente em suas soluções.
