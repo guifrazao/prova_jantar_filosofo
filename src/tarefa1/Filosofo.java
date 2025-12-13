@@ -22,20 +22,19 @@ public class Filosofo implements Runnable {
     @Override
     public void run() {
         while (true){
-            System.out.println("Filosofo " + this.nome + " tentou pegar o garfo " + garfoEsquerdo.getNome()); //log da tentativa de pegar o garfo esquerdo
-            synchronized (garfoEsquerdo){ //tentativa de fato de pegar o garfo esquerdo (acesso ao recurso compartilhado)
-                System.out.println("*Filosofo " + this.nome + " pegou o garfo " + garfoEsquerdo.getNome());
-                System.out.println("Filosofo " + this.nome + " tentou pegar o garfo " + garfoDireito.getNome()); //log da tentativa de pegar o garfo direito
+            log("tentou pegar o garfo " + garfoEsquerdo.getNome());
+            synchronized (garfoEsquerdo){ //tentativa de pegar o garfo esquerdo (acesso ao recurso compartilhado)
+                log("pegou o garfo " + garfoEsquerdo.getNome());
+                log("tentou pegar o garfo " + garfoDireito.getNome());
 
                 synchronized (garfoDireito){
-                    System.out.println("*Filosofo " + this.nome + " pegou o garfo " + garfoDireito.getNome());
-                    System.out.println("Filosofo " + this.nome + " pegou os garfos " + 
-                                        this.garfoEsquerdo.getNome() + " e " + this.garfoDireito.getNome() + " e começou a jantar"); //log de quando o filosofo começa a jantar
+                    log("pegou o garfo " + garfoDireito.getNome());
+                    log("pegou os garfos " + garfoEsquerdo.getNome() + " e " + garfoDireito.getNome() + " e começou a jantar"); //log de quando o filosofo começa a jantar
 
                     this.jantar();
         
                     synchronized(this.proximo) {
-                        this.proximo.notify();
+                        this.proximo.notify(); //acorda a próxima thread
                     }
         
                     this.pensar();
@@ -50,23 +49,17 @@ public class Filosofo implements Runnable {
         final long tempoComendo = this.random.nextLong(1000, 5000); //comendo de 1 a 5 segundos
         final long tempoInicial = System.currentTimeMillis();
 
-        System.out.println(
-            "Filosofo " + this.nome + " está jantando por " +
-            String.valueOf(tempoComendo / 1000.) + " segundos");
+        log("esta jantando por " + String.valueOf(tempoComendo / 1000.) + " segundos");
 
         while (System.currentTimeMillis() - tempoInicial < tempoComendo);
 
-        System.out.println(
-            "Filosofo " + this.nome + 
-            " terminou de jantar!");
+        log("terminou de jantar!");
     }
 
     public void pensar() {
         final long tempoPensando = this.random.nextLong(1000, 3000);
 
-        System.out.println(
-                " *** Filosofo " + this.nome + 
-                " está pensando por " + String.valueOf(tempoPensando / 1000.) + " segundos");
+        log("esta jantando por " + String.valueOf(tempoPensando / 1000.) + " segundos");
 
         try {
 
@@ -75,7 +68,11 @@ public class Filosofo implements Runnable {
             }   
 
         } catch(InterruptedException e) {
-
+            Thread.currentThread().interrupt();
         }
+    }
+
+    private void log(String msg){
+        System.out.println("Filosofo " + this.nome + " " + msg);       
     }
 }

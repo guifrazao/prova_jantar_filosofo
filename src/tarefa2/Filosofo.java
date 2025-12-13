@@ -37,19 +37,19 @@ public class Filosofo implements Runnable {
 
     public void pegarGarfos(Garfo primeiro, Garfo segundo){ //função pegarGarfos implementada pra ajudar na legibilidade do código
 
-        System.out.println("Filosofo " + this.id + " tentou pegar o garfo " + primeiro.getNome()); //log da tentativa de pegar o primeiro garfo
-            synchronized (primeiro){ //tentativa de fato de pegar o primeiro garfo (acesso ao recurso compartilhado)
-                System.out.println("*Filosofo " + this.id + " pegou o garfo " + primeiro.getNome());
-                System.out.println("Filosofo " + this.id + " tentou pegar o garfo " + segundo.getNome()); //log da tentativa de pegar o segundo garfo
+        log("tentou pegar o garfo " + primeiro.getNome());
+            synchronized (primeiro){ //tentativa de pegar o garfo esquerdo (acesso ao recurso compartilhado)
+                log("pegou o garfo " + primeiro.getNome());
+                log("tentou pegar o garfo " + segundo.getNome());
+
                 synchronized (segundo){
-                    System.out.println("*Filosofo " + this.id + " pegou o garfo " + segundo.getNome());
-                    System.out.println("Filosofo " + this.id + " pegou os garfos " + 
-                                        primeiro.getNome() + " e " + segundo.getNome() + " e começou a jantar"); //log de quando o filosofo começa a jantar
+                    log("pegou o garfo " + segundo.getNome());
+                    log("pegou os garfos " + primeiro.getNome() + " e " + segundo.getNome() + " e começou a jantar"); //log de quando o filosofo começa a jantar
 
                     this.jantar();
         
                     synchronized(this.proximo) {
-                        this.proximo.notify(); //acorda a proxima thread
+                        this.proximo.notify(); //acorda a próxima thread
                     }
         
                     this.pensar();
@@ -87,7 +87,11 @@ public class Filosofo implements Runnable {
             }   
 
         } catch(InterruptedException e) {
-
+            Thread.currentThread().interrupt();
         }
+    }
+
+    private void log(String msg){
+        System.out.println("Filosofo " + this.id + " " + msg);       
     }
 }
