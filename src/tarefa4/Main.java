@@ -1,4 +1,4 @@
-package tarefa3;
+package tarefa4;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,30 +6,17 @@ import java.util.List;
 public class Main {
 
     public static void main(String args[]) {
-        
+        int n = 5;
+        Mesa mesa = new Mesa(n);
         List<Thread> threadsFilosofos = new ArrayList<>();
-        List<Garfo> listaGarfos = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++){
-            Garfo g = new Garfo("G"+ String.valueOf(i + 1));
-
-            listaGarfos.add(g);
+        for (int i = 0; i < n; i++){
+            threadsFilosofos.add(new Thread(new Filosofo(i, mesa)));
         }
 
-        for (int i = 0; i < 5; i++) {
-            Garfo garfoEsq = listaGarfos.get(i);
-            Garfo garfoDir = listaGarfos.get((i + 1) % 5);        
-
-            Filosofo f = new Filosofo(i + 1, garfoEsq, garfoDir);
-
-            threadsFilosofos.add(new Thread(f));
-
-        }
-
-
-        for (Thread t : threadsFilosofos)
+        for (Thread t : threadsFilosofos){
             t.start();
-            
+        }
 
         try {   
             Thread.sleep(120000); //execução do programa por pelo menos 2 minutos

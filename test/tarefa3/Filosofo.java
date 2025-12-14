@@ -1,4 +1,4 @@
-package tarefa3;
+package test.tarefa3;
 
 import java.util.Random;
 import java.util.concurrent.Semaphore;
@@ -68,16 +68,23 @@ public class Filosofo implements Runnable {
         final long tempoComendo = this.random.nextLong(1000, 3000); //comendo de 1 a 3 segundos
         final long tempoInicial = System.currentTimeMillis();
 
-        log("está jantando por " + String.valueOf(tempoComendo / 1000.) + " segundos");
+        System.out.println(
+            "Filosofo " + this.id + " está jantando por " +
+            String.valueOf(tempoComendo / 1000.) + " segundos");
+
         while (System.currentTimeMillis() - tempoInicial < tempoComendo); //loop para simular o filosofo jantando
 
-        log("terminou de jantar!");
+        System.out.println(
+            "Filosofo " + this.id + 
+            " terminou de jantar!");
     }
 
     public void pensar() {
         final long tempoPensando = this.random.nextLong(1000, 3000);
 
-        log("está pensando por " + String.valueOf(tempoPensando / 1000.) + " segundos");
+        System.out.println(
+                " *** Filosofo " + this.id + 
+                " está pensando por " + String.valueOf(tempoPensando / 1000.) + " segundos");
 
         try {
             Thread.sleep(tempoPensando);

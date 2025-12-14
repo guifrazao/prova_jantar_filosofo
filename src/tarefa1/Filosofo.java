@@ -1,3 +1,5 @@
+package tarefa1;
+
 import java.util.Random;
 
 public class Filosofo implements Runnable {
@@ -46,7 +48,7 @@ public class Filosofo implements Runnable {
 
     public void jantar() {
 
-        final long tempoComendo = this.random.nextLong(1000, 5000); //comendo de 1 a 5 segundos
+        final long tempoComendo = this.random.nextLong(1000, 3000); //comendo de 1 a 3 segundos
         final long tempoInicial = System.currentTimeMillis();
 
         log("esta jantando por " + String.valueOf(tempoComendo / 1000.) + " segundos");

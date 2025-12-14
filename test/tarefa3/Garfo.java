@@ -1,4 +1,4 @@
-package tarefa3;
+package test.tarefa3;
 
 import java.util.concurrent.Semaphore;
 

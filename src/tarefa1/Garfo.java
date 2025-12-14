@@ -1,3 +1,5 @@
+package tarefa1;
+
 public class Garfo {
     private final String nome;
 

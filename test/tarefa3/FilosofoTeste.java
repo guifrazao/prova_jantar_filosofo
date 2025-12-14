@@ -1,4 +1,4 @@
-package test.tarefa2;
+package test.tarefa3;
 
 import org.junit.Test;
 
@@ -23,24 +23,13 @@ public class FilosofoTeste {
             garfos.add(new Garfo("G" + (i + 1)));
         }
 
-        FilosofoTestavel primeiro = null;
-        FilosofoTestavel ultimo = null;
-
         //Criação dos filosofos
         for (int i = 0; i < NUM_FILOSOFOS; i++) {
-            FilosofoTestavel f = new FilosofoTestavel(i + 1, garfos.get(i),garfos.get((i + 1) % NUM_FILOSOFOS));
-
-            if (primeiro == null) 
-                primeiro = f;
-            if (ultimo != null) 
-                ultimo.setProximoFilosofo(f);
+            FilosofoTestavel f = new FilosofoTestavel(i + 1, garfos.get(i), garfos.get((i + 1) % NUM_FILOSOFOS));
 
             filosofos.add(f);
             threads.add(new Thread(f));
-            ultimo = f;
         }
-
-        ultimo.setProximoFilosofo(primeiro);
 
         threads.forEach(Thread::start);
 
@@ -52,10 +41,22 @@ public class FilosofoTeste {
         threads.forEach(Thread::interrupt);
 
         //Estatisticas
-        for (FilosofoTestavel f : filosofos) {
-            System.out.println("Filósofo " + f.getId() + " jantou " +f.getVezesQueJantou() + " vezes");
+        int totalJantas = 0;
 
-            assertTrue("Filósofo " + f.getId() + " nunca jantou (starvation detectada)", f.getVezesQueJantou() > 0);
+        for (FilosofoTestavel f : filosofos) {
+            int v = f.getVezesQueJantou();
+            totalJantas += v;
+
+            System.out.println(
+                "Filósofo " + f.getId() +
+                " | Refeições: " + v +
+                " | Tempo médio de espera: " +
+                String.format("%.2f ms", f.getTempoMedioEspera())
+            );
+
+            assertTrue("Filósofo " + f.getId() + " nunca jantou (starvation detectada)", v > 0);
         }
+
+        System.out.println("Total de jantas: " + totalJantas);
     }
 }
