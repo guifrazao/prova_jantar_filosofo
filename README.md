@@ -6,19 +6,19 @@ Este repositório contém as 5 tarefas solicitadas na prova final de Programaç�
 
 ## Estrutura do Projeto
 
-docs/
-lib/
-src/
-├── tarefa1/
-├── tarefa2/
-├── tarefa3/
-└── tarefa4/
-teste/
-├── tarefa1/
-├── tarefa2/
-├── tarefa3/
-└── tarefa4/
-README.md
+docs/\\
+lib/\\
+src/\\
+├── tarefa1/\\
+├── tarefa2/\\
+├── tarefa3/\\
+└── tarefa4/\\
+teste/\\
+├── tarefa1/\\
+├── tarefa2/\\
+├── tarefa3/\\
+└── tarefa4/\\
+README.md\\
 RELATORIO.md
 
 
