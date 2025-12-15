@@ -6,12 +6,9 @@ Este repositório contém as 5 tarefas solicitadas na prova final de Programaç�
 
 ## Estrutura do Projeto
 
-docs/
-
-lib/
-
+docs/  
+lib/  
 src/
-
 ├── tarefa1/
 ├── tarefa2/
 ├── tarefa3/
