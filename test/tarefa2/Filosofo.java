@@ -39,14 +39,13 @@ public class Filosofo implements Runnable {
 
     public void pegarGarfos(Garfo primeiro, Garfo segundo){ //função pegarGarfos implementada pra ajudar na legibilidade do código
 
-        System.out.println("Filosofo " + this.id + " tentou pegar o garfo " + primeiro.getNome()); //log da tentativa de pegar o primeiro garfo
+        log("tentou pegar o garfo " + primeiro.getNome()); //log da tentativa de pegar o primeiro garfo
             synchronized (primeiro){ //tentativa de fato de pegar o primeiro garfo (acesso ao recurso compartilhado)
-                System.out.println("*Filosofo " + this.id + " pegou o garfo " + primeiro.getNome());
-                System.out.println("Filosofo " + this.id + " tentou pegar o garfo " + segundo.getNome()); //log da tentativa de pegar o segundo garfo
+                log("pegou o garfo " + primeiro.getNome());
+                log("tentou pegar o garfo " + segundo.getNome()); //log da tentativa de pegar o segundo garfo
                 synchronized (segundo){
-                    System.out.println("*Filosofo " + this.id + " pegou o garfo " + segundo.getNome());
-                    System.out.println("Filosofo " + this.id + " pegou os garfos " + 
-                                        primeiro.getNome() + " e " + segundo.getNome() + " e começou a jantar"); //log de quando o filosofo começa a jantar
+                    log("pegou o garfo " + segundo.getNome());
+                    log("pegou os garfos " + primeiro.getNome() + " e " + segundo.getNome() + " e começou a jantar"); //log de quando o filosofo começa a jantar
 
                     this.jantar();
         
@@ -64,23 +63,17 @@ public class Filosofo implements Runnable {
         final long tempoComendo = this.random.nextLong(1000, 5000); //comendo de 1 a 5 segundos
         final long tempoInicial = System.currentTimeMillis();
 
-        System.out.println(
-            "Filosofo " + this.id + " está jantando por " +
-            String.valueOf(tempoComendo / 1000.) + " segundos");
+        log("está jantando por " + String.valueOf(tempoComendo / 1000.) + " segundos");
 
         while (System.currentTimeMillis() - tempoInicial < tempoComendo); //loop para simular o filosofo jantando
 
-        System.out.println(
-            "Filosofo " + this.id + 
-            " terminou de jantar!");
+        log("terminou de jantar!");
     }
 
     public void pensar() {
         final long tempoPensando = this.random.nextLong(1000, 3000);
 
-        System.out.println(
-                " *** Filosofo " + this.id + 
-                " está pensando por " + String.valueOf(tempoPensando / 1000.) + " segundos");
+        log("está pensando por " + String.valueOf(tempoPensando / 1000.) + " segundos");
 
         try {
 
@@ -91,5 +84,9 @@ public class Filosofo implements Runnable {
         } catch(InterruptedException e) {
 
         }
+    }
+
+    private void log(String msg){
+        System.out.println("Filosofo " + this.id + " " + msg);       
     }
 }

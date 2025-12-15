@@ -1,4 +1,4 @@
-package test.tarefa4;
+package test.tarefa1;
 
 import org.junit.Test;
 
@@ -12,20 +12,35 @@ public class FilosofoTeste {
     public void testeJantarFIlosofo() throws InterruptedException {
 
         int NUM_FILOSOFOS = 5;
-        long TEMPO_TESTE_MS = 300000; //2 minutos
+        long TEMPO_TESTE_MS = 120000; //2 minutos
 
-        Mesa mesa = new Mesa(NUM_FILOSOFOS); //Número de filósofos é o mesmo que o número de garfos (pelo menos para 5 filósofos)
-
+        List<Garfo> garfos = new ArrayList<>();
         List<FilosofoTestavel> filosofos = new ArrayList<>();
         List<Thread> threads = new ArrayList<>();
 
+        //Criação dos garfos
+        for (int i = 0; i < NUM_FILOSOFOS; i++) {
+            garfos.add(new Garfo("G" + (i + 1)));
+        }
+
+        FilosofoTestavel primeiro = null;
+        FilosofoTestavel ultimo = null;
+
         //Criação dos filosofos
         for (int i = 0; i < NUM_FILOSOFOS; i++) {
-            FilosofoTestavel f = new FilosofoTestavel(i, mesa);
+            FilosofoTestavel f = new FilosofoTestavel("F" + String.valueOf(i+1), garfos.get(i),garfos.get((i + 1) % NUM_FILOSOFOS));
+
+            if (primeiro == null) 
+                primeiro = f;
+            if (ultimo != null) 
+                ultimo.setProximoFilosofo(f);
 
             filosofos.add(f);
             threads.add(new Thread(f));
+            ultimo = f;
         }
+
+        ultimo.setProximoFilosofo(primeiro);
 
         threads.forEach(Thread::start);
 
@@ -46,13 +61,13 @@ public class FilosofoTeste {
             soma += v;
 
             System.out.println(
-                "Filósofo " + f.getId() +
+                "Filósofo " + f.getNome() +
                 " | Refeições: " + v +
                 " | Tempo médio de espera: " + String.format("%.2f ms", f.getTempoMedioEspera()) + 
                 " | Tempo total de espera: " + f.getTempoTotalEspera() + " ms"
             );
 
-            assertTrue("Filósofo " + f.getId() + " nunca jantou (starvation detectada)", v > 0);
+            assertTrue("Filósofo " + f.getNome() + " nunca jantou (starvation detectada)", v > 0);
         }
 
         System.out.println("Total de jantas: " + totalJantas);
@@ -71,8 +86,7 @@ public class FilosofoTeste {
         double desvioPadrao = Math.sqrt(variancia);
         double coeficienteVariacao = desvioPadrao / media;
 
-        double TEMPO_TESTE_S = TEMPO_TESTE_MS/1000; //cálculo da taxa de utilização dos garfos deve ser em segundos
-        double utilizacaoGarfos = (2.0 * totalJantas) / (NUM_FILOSOFOS * TEMPO_TESTE_S);
+        double utilizacaoGarfos = (2.0 * totalJantas) / (NUM_FILOSOFOS * TEMPO_TESTE_MS);
 
         System.out.println("Coeficiente de variação: " + String.format("%.4f", coeficienteVariacao));
         System.out.println("Taxa de utilização dos garfos: " + String.format("%.4f refeições/segundo/garfo", utilizacaoGarfos));

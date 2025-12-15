@@ -1,4 +1,4 @@
-package test.tarefa2;
+package test.tarefa1;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
@@ -12,8 +12,8 @@ public class FilosofoTestavel extends Filosofo { //Classe Filosofo adapdata para
 
     private volatile boolean rodando = true;
 
-    public FilosofoTestavel(int id, Garfo esq, Garfo dir) {
-        super(id, esq, dir);
+    public FilosofoTestavel(String nome, Garfo esq, Garfo dir) {
+        super(nome, esq, dir);
     }
 
     @Override

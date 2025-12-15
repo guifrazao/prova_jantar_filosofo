@@ -4,6 +4,24 @@ Este repositório contém as 5 tarefas solicitadas na prova final de Programaç�
 
 ---
 
+## Estrutura do Projeto
+
+docs/
+lib/
+src/
+├── tarefa1/
+├── tarefa2/
+├── tarefa3/
+└── tarefa4/
+teste/
+├── tarefa1/
+├── tarefa2/
+├── tarefa3/
+└── tarefa4/
+README.md
+RELATORIO.md
+
+
 ## Compilação e execução
 
 Acesse um dos seguintes diretórios por meio de um dos seguintes comandos:
@@ -29,6 +47,10 @@ java nome_da_pasta_da_tarefa_que_deseja_executar/Main
 ```
 
 Caso deseje executar um teste, vá para o diretório da tarefa que deseja executar (test/nome_da_tarefa), vá para o arquivo FilosofoTeste e clique no botão de executar ao lado esquerdo da declaração da classe (public FilosofoTeste {})
+
+## Link para o relatório comparativo
+
+https://github.com/guifrazao/prova_jantar_filosofo/blob/main/RELATORIO.md
 
 ---
 
@@ -81,6 +103,6 @@ Esta versão utiliza um monitor representado pela classe Mesa. O monitor age com
 
 Essa solução previne o deadlock pois apenas um filósofo tem acesso à mesa por vez, garantindo que sempre existam garfos o bastante para que o filósofo comece a jantar. Já o starvation é previnido graças à fila mencionada anteriormente, sendo que esta garante que todos os filósofos acessem a mesa aproximadamente a mesma quantidade de vezes, fazendo com que nenhum filósofo coma significativamente menos que outros.
 
-Essa versão elimina todos os problemas observados em versões anteriores, como o deadlock nas versão da tarefa 2 e o starvation nas versões da tarefa 2 e tarefa 3. Apesar disso, essa versão possui um número total de refeições significativamente menor do que as outras versões, possuindo 54 refeições totais, sendo aproximadamente 35,71% a menos de refeições do que a versão da tarefa 2 e 60,58% a menos do que a versão da tarefa 3.
+Essa versão elimina todos os problemas observados em versões anteriores, como o deadlock nas versão da tarefa 2 e o starvation nas versões da tarefa 2 e tarefa 3. Apesar disso, essa versão possui um número total de refeições significativamente menor do que as outras versões, possuindo 76 refeições totais, sendo aproximadamente 9,52% a menos de refeições do que a versão da tarefa 2 e 44,52% a menos do que a versão da tarefa 3.
 
 Levando em conta o parágrafo anterior, caso queira uma versão com menos problemas possíveis, porém ao custo do desempenho, a versão da tarefa 4 é a versão ideal. Caso queira uma versão com desempenho significativamente maior, mas com a possibilidade de starvation, utilize a versão da tarefa 3. Caso queira uma versão com menos complexidade, mas com desempenho menor que a versão da tarefa 3 e com starvation não solucionado, utilize a versão da tarefa 2.

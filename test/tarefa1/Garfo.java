@@ -1,6 +1,6 @@
-package test.tarefa4;
+package test.tarefa1;
 
-public class Garfo{
+public class Garfo {
     private final String nome;
 
     public Garfo(String nome){
@@ -10,4 +10,5 @@ public class Garfo{
     public String getNome(){
         return this.nome;
     }
+    
 }
